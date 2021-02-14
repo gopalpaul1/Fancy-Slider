@@ -2,14 +2,12 @@ const imagesArea = document.querySelector('.images');
 const gallery = document.querySelector('.gallery');
 const galleryHeader = document.querySelector('.gallery-header');
 const searchBtn = document.getElementById('search-btn');
-
 document.getElementById("search").addEventListener("keypress", function(event) {
     
   if (event.key == 'Enter')
     searchBtn.click();
 
 });
-
 
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
@@ -24,6 +22,7 @@ const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 
 // show images 
 const showImages = (images) => {
+
   imagesArea.style.display = 'block';
   gallery.innerHTML = '';
   // show gallery title
@@ -40,6 +39,7 @@ const showImages = (images) => {
 }
 
 const getImages = (query) => {
+
   toggleSpinner(true)
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
@@ -50,6 +50,7 @@ const getImages = (query) => {
 
 let slideIndex = 0;
 const selectItem = (event, img) => {
+
   let element = event.target;
   element.classList.toggle('added');
   element.classList.toggle('remove');
@@ -62,9 +63,12 @@ const selectItem = (event, img) => {
       sliders.splice(item, 1);
     }
   }
+
 }
+
 var timer;
 const createSlider = () => {
+
   // check slider image length
   if (sliders.length < 2) {
     alert('Select at least 2 image.')
@@ -127,6 +131,7 @@ const changeSlide = (index) => {
   })
 
   items[index].style.display = "block"
+
 }
 
 searchBtn.addEventListener('click', function () {
@@ -134,10 +139,8 @@ searchBtn.addEventListener('click', function () {
   document.querySelector('.main').style.display = 'none';
   clearInterval(timer);
   const search = document.getElementById('search');
-  search.innerHTML = '';
   getImages(search.value)
   sliders.length = 0;
-  
   
 })
 
@@ -146,8 +149,8 @@ sliderBtn.addEventListener('click', function () {
 })
 
 const toggleSpinner = (show) =>{
-  const loadingSpinner = document.getElementById("spinner");
 
+  const loadingSpinner = document.getElementById("spinner");
   if(show){
     loadingSpinner.classList.remove("d-none");
   }
